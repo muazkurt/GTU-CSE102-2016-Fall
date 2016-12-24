@@ -1,0 +1,18 @@
+circular: $(SRCCircular) HW09_MUAZ_KURT_151044062_CircularList.exe
+
+$OBJCircular    :=  $(SRCCircular:.c.o)
+
+HW09_MUAZ_KURT_151044062_CircularList.exe:    $(OBJCircular)
+    @printf     "   CC                  $(Binary)/$@\n"
+    $(CC)       $(OBJCircular)  -o      $(Binary)/$@
+
+
+clear:
+    @printf     "   RM  \n  $(OBJCircular), $(OBJDouble)\n"
+    $(RM)   $(OBJCircular)  $(OBJDouble)
+
+clear_all:
+    @printf "   RM  \n  $(OBJCircular), $(OBJDouble)\n"
+    @printf "$(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe\n"
+    @printf "$(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe\n"
+    $(RM)   $(OBJCircular)  $(OBJDouble) $(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe $(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe
