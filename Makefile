@@ -15,58 +15,54 @@ Circular    := $(Root)/CircularList
 Double      := $(Root)/DoubleList
 Main        := $(Root)
 
-CC          := gcc
-LD   	    := gcc
-CFLAGS		:= -Wno-deprecated -Wno-write-strings -Ofast -ansi -I$(Includes)
-LDFLAGS		:= -Ofast -ansi -s -static
-RM          := rm -f
-
-echo_cmd = @printf   "   %-25s %s\n" "$(1)" "$(2)"
-
+CC		 := gcc
+CFLAGS   := -Wno-deprecated -Wno-write-strings -Ofast -ansi -I$(Includes)
+LDFLAGS  := -Ofast -ansi -s -static
+RM       := rm -f
 
 usage:
-		@echo ""
-		@echo "Makefile for Double and Circular List"
-		@echo ""
-		@echo "Usage:"
-		@echo " make double           # Compile Double List"
-		@echo " make circular         # Compile Circular List"
-		@echo " make clear            # Delete all object files"
-		@echo " make clear_all        # Delete all object files and binary files"
-		@echo ""
+	@echo ""
+	@echo "Makefile for Double and Circular List"
+	@echo ""
+	@echo "Usage:"
+	@echo " make double           # Compile Double List"
+	@echo " make circular         # Compile Circular List"
+	@echo " make clear            # Delete all object files"
+	@echo " make clear_all        # Delete all object files and binary files"
+	@echo ""
 
-SRCCircular     =   $(Circular)/HW09_MUAZ_KURT_151044062_CircularList.c \
-                    $(Main)/main.c
+SRCCircular	=	$(Circular)/HW09_MUAZ_KURT_151044062_CircularList.c \
+				$(Main)/main.c
 
-SRCDouble       =   $(Double)/HW09_MUAZ_KURT_151044062_DoubleList.c \
-                    $(Main)/main.c
+circular: $(SRCCircular) CircularList.exe
 
-double: $(SRCDouble) HW09_MUAZ_KURT_151044062_DoubleList.exe
+OBJCircular    :=  $(SRCCircular:.c=.o)
 
-OBJDouble       :=  $(SRCDouble:.c.o)
-
-HW09_MUAZ_KURT_151044062_DoubleList.exe: $(OBJDouble)
-									@printf     "   LD                  $(Binary)/$@\n"
-									$(LD) $(LDFLAGS) $(OBJDouble) $(OBJDouble) -o $(Binary)/$@
-
-circular: $(SRCCircular) HW09_MUAZ_KURT_151044062_CircularList.exe
-
-$OBJCircular    :=  $(SRCCircular:.c.o)
-
-HW09_MUAZ_KURT_151044062_CircularList.exe: $(OBJCircular)
-										@printf     "   LD                  $(Binary)/$@\n"
-										$(LD) $(LDFLAGS) $(OBJCircular) -o $(Binary)/$@
+CircularList.exe: $(OBJCircular)
+	@printf     "   LD                  $(Binary)/$@	\n"
+	$(CC) $(LDFLAGS) -o $(Binary)/$@ $(OBJCircular)
 
 .c.o:
-		$(call echo_cmd, CC     ,$@)
-		$(CC) $(CFLAGS) -c $< -o $@
+	@printf     "   CC            $@		\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+SRCDouble	=   $(Double)/HW09_MUAZ_KURT_151044062_DoubleList.c \
+                    $(Main)/main.c
+
+double: $(SRCDouble) DoubleList.exe
+
+OBJDouble	:=  $(SRCDouble:.c.o)
+
+DoubleList.exe: $(OBJDouble)
+	@printf     "   LD                  $(Binary)/$@	\n"
+	$(CC) $(LDFLAGS) -o $(Binary)/$@ $(OBJDouble)
 
 clear:
-		@printf     "   RM  \n  $(OBJCircular), $(OBJDouble)\n"
-		$(RM)   $(OBJCircular)  $(OBJDouble)
+	@printf     "   RM    $(OBJCircular), $(OBJDouble)\n"
+	$(RM) $(OBJCircular) $(OBJDouble)
 
 clear_all:
-			@printf "   RM  \n  $(OBJCircular), $(OBJDouble)\n"
-			@printf "$(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe\n"
-			@printf "$(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe\n"
-			$(RM) $(OBJCircular) $(OBJDouble) $(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe $(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe
+	@printf "   RM  \n  $(OBJCircular), $(OBJDouble)\n"
+	@printf "$(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe\n"
+	@printf "$(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe\n"
+	$(RM) $(OBJCircular) $(OBJDouble) $(Binary)/HW09_MUAZ_KURT_151044062_CircularList.exe $(Binary)/HW09_MUAZ_KURT_151044062_DoubleList.exe

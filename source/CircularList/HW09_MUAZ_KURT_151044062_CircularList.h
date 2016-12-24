@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct node_p {
+typedef struct circuit_a{
     char cur[3];
     int v;
-    struct node_p *next, *prew; 
-} node;
+    struct circuit_a *next; 
+} circuit;
 int size_list();
-void insert_node(char *current, int volts, int position);
-void delete_node(node *n);
+circuit *insert_node(char *current, int volts, int position);
+void delete_node(circuit *n);
 void display_list();
