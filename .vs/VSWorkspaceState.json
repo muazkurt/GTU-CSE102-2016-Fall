@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\source",
+    "\\source\\CircularList",
     "\\source\\DoubleList"
   ],
-  "SelectedNode": "\\Makefile",
+  "SelectedNode": "\\source\\main.c",
   "PreviewInSolutionExplorer": false
 }
