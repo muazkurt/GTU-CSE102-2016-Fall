@@ -46,12 +46,12 @@ CircularList.exe: $(OBJCircular)
 	@printf     "   CC            $@		\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 
-SRCDouble	=   $(Double)/HW09_MUAZ_KURT_151044062_DoubleList.c \
-                    $(Main)/main.c
+SRCDouble	=	$(Double)/HW09_MUAZ_KURT_151044062_DoubleList.c \
+				$(Main)/main.c
 
 double: $(SRCDouble) DoubleList.exe
 
-OBJDouble	:=  $(SRCDouble:.c.o)
+OBJDouble	:=  $(SRCDouble:.c=.o)
 
 DoubleList.exe: $(OBJDouble)
 	@printf     "   LD                  $(Binary)/$@	\n"
